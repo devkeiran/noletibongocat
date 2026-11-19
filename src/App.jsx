@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Pet from "./Pet.jsx";
+import DancingCats from "./DancingCats.jsx";
 import "./App.css";
 
 const SNIPPET = `import Pet from "./Pet";
@@ -17,6 +18,7 @@ export default function App() {
   const [wander, setWander] = useState(true);
   const [follow, setFollow] = useState(false);
   const [size, setSize] = useState(200);
+  const [cats, setCats] = useState(true);
 
   return (
     <div className="page">
@@ -48,6 +50,10 @@ export default function App() {
             <label>
               <input type="checkbox" checked={follow} onChange={(e) => setFollow(e.target.checked)} />
               Seguir o mouse
+            </label>
+            <label>
+              <input type="checkbox" checked={cats} onChange={(e) => setCats(e.target.checked)} />
+              Gatinhos dançantes
             </label>
             <label className="range">
               Tamanho: {size}px
@@ -100,6 +106,7 @@ export default function App() {
       </main>
 
       <Pet size={size} wander={wander} follow={follow} />
+      {cats && <DancingCats />}
     </div>
   );
 }
