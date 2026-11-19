@@ -1,0 +1,100 @@
+.pet-root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2147483000;
+  pointer-events: none; /* o quadrado não bloqueia a página… */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* …só a silhueta do bicho recebe clique/arraste */
+.pet-hit {
+  position: absolute;
+  left: 12%;
+  top: 14%;
+  width: 78%;
+  height: 86%;
+  border-radius: 48% 48% 14% 14%;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.pet-hop,
+.pet-head {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pet-hop {
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.35));
+}
+
+.pet-head {
+  transform-origin: 50% 85%;
+  transform-style: preserve-3d;
+  perspective: 700px;
+}
+
+.pet-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* balão de fala */
+.pet-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  margin-bottom: -4px;
+  translate: -50% 0;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 14px;
+  background: #fff;
+  color: #1b2a12;
+  font: 600 14px/1.2 system-ui, sans-serif;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+.pet-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  translate: -50% 0;
+  border: 7px solid transparent;
+  border-top-color: #fff;
+}
+
+/* Zzz */
+.pet-zzz {
+  position: absolute;
+  right: 4%;
+  top: 6%;
+  font: 700 22px/1 system-ui, sans-serif;
+  color: #d6f66b;
+  pointer-events: none;
+}
+.pet-zzz span {
+  position: absolute;
+  opacity: 0;
+  animation: pet-z 2.4s ease-in infinite;
+}
+.pet-zzz span:nth-child(2) { animation-delay: 0.8s; font-size: 28px; }
+.pet-zzz span:nth-child(3) { animation-delay: 1.6s; font-size: 34px; }
+@keyframes pet-z {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.7); }
+  25%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(16px, -38px) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pet-zzz span { animation: none; opacity: 1; }
+}
