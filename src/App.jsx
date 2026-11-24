@@ -1,6 +1,10 @@
 import { useState } from "react";
 import Pet from "./Pet.jsx";
 import DancingCats from "./DancingCats.jsx";
+import KuroCat from "./KuroCat.jsx";
+import orangeWhite from "./kurocat/orangeWhite.json";
+import blackSkin from "./kurocat/black.json";
+import siameseSkin from "./kurocat/siamese.json";
 import "./App.css";
 
 const SNIPPET = `import Pet from "./Pet";
@@ -18,7 +22,9 @@ export default function App() {
   const [wander, setWander] = useState(true);
   const [follow, setFollow] = useState(false);
   const [size, setSize] = useState(200);
-  const [cats, setCats] = useState(true);
+  const [cats, setCats] = useState(false); // gatinhos antigos: desativados por enquanto
+  const [pet, setPet] = useState(false); // alienígena antigo: desativado por enquanto
+  const [kuro, setKuro] = useState(true);
 
   return (
     <div className="page">
@@ -54,6 +60,14 @@ export default function App() {
             <label>
               <input type="checkbox" checked={cats} onChange={(e) => setCats(e.target.checked)} />
               Gatinhos dançantes
+            </label>
+            <label>
+              <input type="checkbox" checked={pet} onChange={(e) => setPet(e.target.checked)} />
+              Alienígena (antigo)
+            </label>
+            <label>
+              <input type="checkbox" checked={kuro} onChange={(e) => setKuro(e.target.checked)} />
+              Gatinhos KuroCat (seguem mouse e teclado)
             </label>
             <label className="range">
               Tamanho: {size}px
@@ -105,8 +119,15 @@ export default function App() {
         </section>
       </main>
 
-      <Pet size={size} wander={wander} follow={follow} />
+      {pet && <Pet size={size} wander={wander} follow={follow} />}
       {cats && <DancingCats />}
+      {kuro && (
+        <>
+          <KuroCat skin={orangeWhite} right={16} />
+          <KuroCat skin={blackSkin} right={266} />
+          <KuroCat skin={siameseSkin} right={516} />
+        </>
+      )}
     </div>
   );
 }
